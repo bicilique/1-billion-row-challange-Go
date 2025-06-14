@@ -37,3 +37,4 @@ mem.prof
 output.csv
 another.go
 anomalies.csv
+.DS_Store
