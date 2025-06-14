@@ -1,0 +1,13 @@
+version: '3.9'
+services:
+  esign-core:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: one-billion-row-challange
+    environment:
+      - PORT=8080
+      - GIN_MODE=debug
+    ports:
+      - "8080:8080"
+    restart: unless-stopped

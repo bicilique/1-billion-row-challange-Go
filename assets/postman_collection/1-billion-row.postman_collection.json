@@ -1,0 +1,105 @@
+{
+	"info": {
+		"_postman_id": "07a45616-e491-4a89-ac04-494afc18c2a3",
+		"name": "1-billion-row",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28644350"
+	},
+	"item": [
+		{
+			"name": "HealthCheck",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/health",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "NumCPU",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/numcpu",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"numcpu"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "One Billion Row Challange",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/Users/balaisertifikasielektronik/IdeaProjects/Github/1-billion-row-challange-Go/assets/sample/measurements-5000.txt"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/one-billion-row-challenge",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"one-billion-row-challenge"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Anomaly Detection",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/Users/balaisertifikasielektronik/IdeaProjects/Github/1-billion-row-challange-Go/assets/measurements-100000.txt"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/anomaly-detection ",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"anomaly-detection "
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "",
+			"type": "default"
+		}
+	]
+}
