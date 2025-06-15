@@ -1,0 +1,13 @@
+global:
+  scrape_interval: 5s
+  evaluation_interval: 5s
+
+scrape_configs:
+  - job_name: '1brc-api'
+    static_configs:
+      - targets: ['one-billion-row-challange:8080']
+      # - targets: ['host.docker.internal:8080']
+      # - targets: ['localhost:8080'] # replace with your API's host/port if different
+
+# Command that you could run
+# docker run -p 9090:9090  -v $(pwd)/prometheus.yml:/etc/prometheus/prometheus.yml prom/prometheus

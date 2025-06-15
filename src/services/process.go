@@ -31,7 +31,7 @@ func NewProcessService(numCPU int) ProcessService {
 }
 
 func (ps *processService) OneBillionRowChallange(input multipart.File, header *multipart.FileHeader) (map[string]*models.TempStat, error) {
-	start := time.Now()
+	// start := time.Now()
 	// Validate the number of CPU cores
 	if ps.NumCPU <= 0 {
 		return nil, fmt.Errorf("invalid number of CPU cores: %d", ps.NumCPU)
@@ -52,15 +52,17 @@ func (ps *processService) OneBillionRowChallange(input multipart.File, header *m
 
 	// Merge + output
 	finalResult := utilities.MergeResults(workerResults)
-	totalDone := time.Since(start)
-	var logBuf bytes.Buffer
-	showUsage(totalDone, &logBuf)
-	fmt.Print(logBuf.String())
+
+	// Temporary commented out logging to avoid interleaving
+	// totalDone := time.Since(start)
+	// var logBuf bytes.Buffer
+	// showUsage(totalDone, &logBuf)
+	// fmt.Print(logBuf.String())
 	return finalResult, nil
 }
 
 func (ps *processService) AnomalyDetection(input multipart.File) ([]*models.Anomaly, error) {
-	start := time.Now()
+	// start := time.Now()
 	lines := make(chan []byte, 10000)
 	splits := make(chan models.LineSplit, 10000)
 	anomalies := make(chan models.Anomaly, 1000)
@@ -114,17 +116,17 @@ func (ps *processService) AnomalyDetection(input multipart.File) ([]*models.Anom
 		detectedAnomalies = append(detectedAnomalies, &anomaly)
 	}
 
-	// Buffered logging to avoid log interleaving
-	var logBuf bytes.Buffer
-	logBuf.WriteString("✅ Anomaly Detection Complete\n")
-	logBuf.WriteString(fmt.Sprintf("📊 Total Anomalies Detected : %d\n", anomalyCount))
-	logBuf.WriteString(fmt.Sprintf("⚠️  Spike Anomalies         : %d\n", spikeCount))
+	// Temporary commented out logging to avoid interleaving
+	// // Buffered logging to avoid log interleaving
+	// var logBuf bytes.Buffer
+	// logBuf.WriteString("✅ Anomaly Detection Complete\n")
+	// logBuf.WriteString(fmt.Sprintf("📊 Total Anomalies Detected : %d\n", anomalyCount))
+	// logBuf.WriteString(fmt.Sprintf("⚠️  Spike Anomalies         : %d\n", spikeCount))
 
-	// Calculate and log the total time taken
-	totalDone := time.Since(start)
-	showUsage(totalDone, &logBuf)
-	fmt.Print(logBuf.String())
-
+	// // Calculate and log the total time taken
+	// totalDone := time.Since(start)
+	// showUsage(totalDone, &logBuf)
+	// fmt.Print(logBuf.String())
 	return detectedAnomalies, nil
 }
 
@@ -136,6 +138,7 @@ func makeSingleEntryChan(entry models.LineSplit) <-chan models.LineSplit {
 	return ch
 }
 
+// showUsage logs the total time taken for the operation and memory usage statistics.
 func showUsage(totalDone time.Duration, logBuf *bytes.Buffer) {
 	// Log the total time taken for the operation
 	logBuf.WriteString(fmt.Sprintf("✅ Total Time Elapsed         : %.3fs\n", totalDone.Seconds()))
