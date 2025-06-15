@@ -1,41 +1,69 @@
 # 1-Billion-Row Challenge (Go)
 
-This project solves the 1 Billion Row Challenge using Golang and Goroutines for high-performance data processing. The goal is to efficiently process and analyze extremely large datasets (up to 1 billion rows) with a focus on speed and concurrency.
+Welcome! This project is a simple but powerful example of how to process huge amounts of data (up to 1 billion rows) using Go. It is designed to be easy to understand, so you can learn about fast data processing, Go concurrency, and modern DevOps tools.
 
-## Features
-- High-performance data processing using Go's concurrency model
-- REST API built with Gin for data ingestion and querying
-- Modular code structure for easy maintenance and extension
-- Includes sample datasets and Postman collection for testing
+---
 
-## Project Structure
-- `src/` - Main Go source code
-  - `main.go` - Application entry point
-  - `delivery/` - HTTP and routing logic
-  - `models/` - Data models
-  - `services/` - Business logic and processing
-  - `utilities/` - Helper utilities
+## 🚀 Features
+- **Very fast data processing** using Go's goroutines (lightweight threads)
+- **REST API** with Gin so you can send and get data easily
+- **Modular code**: easy to read, change, and extend
+- **Live monitoring**: see how your app is running with Prometheus & Grafana
+- **Sample data and Postman collection** for easy testing
+- **Runs in Docker**: start everything with one command
+
+## 🗂️ Project Structure
+- `src/` - Go source code
+  - `main.go` - Program entry point
+  - `delivery/` - Handles HTTP requests
+  - `models/` - Data structures
+  - `services/` - Main logic for processing data
+  - `utilities/` - Helper functions
   - `test/` - Unit tests
-- `assets/` - Sample datasets and scripts
+- `assets/` - Example data and scripts
   - `sample/` - Example measurement files
-  - `script/` - k6 Test scripts
+  - `script/` - Load testing scripts
   - `postman_collection/` - Postman API collection
-- `Dockerfile` - Multi-stage build for production-ready container
-- `docker-compose.yml` - Easy local deployment
+- `Dockerfile` - Build instructions for Docker
+- `docker-compose.yml` - Runs Go app, Prometheus, and Grafana together
+- `6671_rev2.json` - Example Grafana dashboard for Go metrics
 
-## Getting Started
+---
+
+## 🏁 Getting Started
 
 ### Prerequisites
-- Docker and Docker Compose installed
+- Install [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/)
 
-### Build and Run with Docker Compose
+### 🚦 Start Everything (App + Monitoring)
 ```sh
-docker-compose up --build
+docker-compose up -d
 ```
-The app will be available at [http://localhost:8080](http://localhost:8080).
+- App: [http://localhost:8080](http://localhost:8080)
+- Grafana: [http://localhost:3000](http://localhost:3000)  
+  _Login: `admin` / `admin`_
+- Prometheus: [http://localhost:9090](http://localhost:9090)
 
-### Running Tests
-The Dockerfile includes a test stage. To run tests manually:
+---
+
+## 📈 Monitoring & Observability
+- **Prometheus** collects Go app metrics automatically
+- **Grafana** shows dashboards using Prometheus data
+- **To use the sample dashboard:**
+  1. Open Grafana ([localhost:3000](http://localhost:3000))
+  2. Go to **Dashboards → Import**
+  3. Upload `6671_rev2.json` from the project root
+  4. Select Prometheus as the data source and click **Import**
+- The dashboard shows:
+  - Memory usage
+  - Goroutine count
+  - File descriptors
+  - GC (garbage collection) duration
+
+---
+
+## 🧪 Running Tests
+To run tests in Docker:
 ```sh
 docker build --target tester -t 1brc-test .
 docker run --rm 1brc-test
@@ -46,8 +74,16 @@ cd src
 go test ./...
 ```
 
-## API Documentation
-- Import the Postman collection from `assets/postman_collection/1-billion-row.postman_collection.json` to explore available endpoints.
+---
 
-## License
+## 📬 API Documentation
+- Import the Postman collection from `assets/postman_collection/1-billion-row.postman_collection.json` into Postman to try the API endpoints.
+
+---
+
+## 📝 License
 MIT
+
+---
+
+> _This project is great for learning about Go, fast data processing, and modern monitoring tools. Have fun exploring!_
