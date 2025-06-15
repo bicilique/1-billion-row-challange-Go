@@ -1,9 +1,7 @@
 version: '3.9'
 services:
-  esign-core:
-    build:
-      context: .
-      dockerfile: Dockerfile
+  one-billion-row-challange:
+    image: afiffaizianur/one-billion-row-challange:latest
     container_name: one-billion-row-challange
     environment:
       - PORT=8080
@@ -11,3 +9,20 @@ services:
     ports:
       - "8080:8080"
     restart: unless-stopped
+    networks:
+      - monitoring
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    depends_on:
+      - one-billion-row-challange
+    networks:
+      - monitoring
+
+networks:
+  monitoring:
